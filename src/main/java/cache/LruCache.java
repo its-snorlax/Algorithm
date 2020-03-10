@@ -2,12 +2,13 @@ package cache;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Optional;
 
-public class LruCache {
+public class LruCache<K, V> {
 
     private int Max_CAPACITY;
-    private HashMap<Integer, Entry> hashMap;
-    private LinkedList<Entry> linkedList;
+    private HashMap<K, Entry<K, V>> hashMap;
+    private LinkedList<Entry<K, V>> linkedList;
 
     public LruCache(int size) {
         this.Max_CAPACITY = size;
@@ -15,32 +16,32 @@ public class LruCache {
         this.hashMap = new HashMap<>();
     }
 
-    public int get(int key) {
+    public Optional<V> get(K key) {
         if (hashMap.containsKey(key)) {
-            Entry entry = hashMap.get(key);
+            Entry<K,V> entry = hashMap.get(key);
             linkedList.remove(entry);
             linkedList.addFirst(entry);
-            return entry.value;
+            return Optional.of(entry.value);
         }
-        return 0;
+        return Optional.empty();
     }
 
 
-    public void put(int key, int value) {
+    public void put(K key, V value) {
         if (linkedList.size() == Max_CAPACITY) {
-            Entry entry = linkedList.removeLast();
+            Entry<K,V> entry = linkedList.removeLast();
             hashMap.remove(entry.key);
         }
-        Entry newEntry = new Entry(key, value);
+        Entry<K, V> newEntry = new Entry<>(key, value);
         linkedList.addFirst(newEntry);
         hashMap.put(key, newEntry);
     }
 
-    class Entry {
-        int key;
-        int value;
+    static class Entry<K, V> {
+        K key;
+        V value;
 
-        public Entry(int key, int value) {
+        public Entry(K key, V value) {
             this.key = key;
             this.value = value;
         }

@@ -1,4 +1,5 @@
-import cache.TtlCache;
+package cache;
+
 import org.junit.Test;
 
 import java.time.Duration;

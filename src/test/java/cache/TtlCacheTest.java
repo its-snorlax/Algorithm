@@ -3,35 +3,43 @@ package cache;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TtlCacheTest {
 
     @Test
     public void shouldGetAndPutValue() {
-        TtlCache ttlCache = new TtlCache(Duration.ofMillis(500));
+        TtlCache<Integer, Integer> ttlCache = new TtlCache<>(Duration.ofMillis(500));
         ttlCache.put(1, 1);
         ttlCache.put(2, 3);
         ttlCache.put(3, 4);
 
-        assertEquals(3, ttlCache.get(2));
-        assertEquals(1, ttlCache.get(1));
-        assertEquals(4, ttlCache.get(3));
+        assertEquals(new Integer(3), ttlCache.get(2).get());
+        assertEquals(new Integer(1), ttlCache.get(1).get());
+        assertEquals(new Integer(4), ttlCache.get(3).get());
     }
 
     @Test
-    public void shouldNotGetValuesWhenExpired() throws InterruptedException {
-        TtlCache ttlCache = new TtlCache(Duration.ofMillis(500));
+    public void shouldReturnEmptyOptionalObjectWhileGetValuesWhenExpired() throws InterruptedException {
+        TtlCache<Integer, Integer> ttlCache = new TtlCache<>(Duration.ofMillis(500));
         ttlCache.put(1, 1);
         TimeUnit.SECONDS.sleep(1);
-        assertEquals(0, ttlCache.get(1));
+        assertEquals(Optional.empty(), ttlCache.get(1));
     }
 
     @Test
-    public void shouldNotGetValueIfNeverInserted() {
-        TtlCache ttlCache = new TtlCache(Duration.ofMillis(500));
-        assertEquals(0, ttlCache.get(1));
+    public void shouldReturnEmptyOptionalObjectWhenGetValueIfNeverInserted() {
+        TtlCache<Integer, Integer> ttlCache = new TtlCache<>(Duration.ofMillis(500));
+        assertFalse(ttlCache.get(1).isPresent());
+    }
+
+    @Test
+    public void shouldReturnOptionalObjectWithValuePresentInItWhenDataIsGet() {
+        TtlCache<Integer, Integer> ttlCache = new TtlCache<>(Duration.ofMillis(500));
+        ttlCache.put(1, 1);
+        assertTrue(ttlCache.get(1).isPresent());
     }
 }

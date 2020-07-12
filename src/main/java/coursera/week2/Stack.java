@@ -1,8 +1,12 @@
 package coursera.week2;
 
-public class Stack {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private StackNode top;
+public class Stack<T> {
+
+    private StackNode<T> top;
 
     public Stack() {
         this.top = null;
@@ -12,36 +16,39 @@ public class Stack {
         return top == null;
     }
 
-    public void push(String item) {
-        top = new StackNode(item, top);
+    public void push(T item) {
+        top = new StackNode<T>(item, top);
     }
 
-    public String pop() {
-        String poppedData = top.getData();
+    public T pop() {
+        T poppedData = top.getData();
         top = top.next;
         return poppedData;
     }
 
-    public String iteration() {
-        StackNode top = this.top;
-        StringBuilder stringBuilder = new StringBuilder();
+    public List<T> iteration() {
+        if (isEmpty()) {
+            return Collections.emptyList();
+        }
+        StackNode<T> top = this.top;
+        List<T> list = new ArrayList<>();
         while (top != null) {
-            stringBuilder.append(top.getData()).append(" ");
+            list.add(top.getData());
             top = top.next;
         }
-        return stringBuilder.toString();
+        return list;
     }
 
-    private static class StackNode {
-        private String data;
-        private StackNode next;
+    private static class StackNode<T> {
+        private T data;
+        private StackNode<T> next;
 
-        public StackNode(String data, StackNode oldFirst) {
+        public StackNode(T data, StackNode<T> oldFirst) {
             this.data = data;
             this.next = oldFirst;
         }
 
-        public String getData() {
+        public T getData() {
             return data;
         }
     }

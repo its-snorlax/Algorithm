@@ -1,10 +1,14 @@
 package coursera.week2;
 
 
-public class Queue {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private QueueNode front;
-    private QueueNode last;
+public class Queue<T> {
+
+    private QueueNode<T> front;
+    private QueueNode<T> last;
 
     public Queue() {
         front = null;
@@ -15,23 +19,26 @@ public class Queue {
         return front == null && last == null;
     }
 
-    public String iteration() {
-        StringBuilder stringBuilder = new StringBuilder();
-        QueueNode front = this.front;
+    public List<T> iteration() {
+        if (isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<T> list = new ArrayList<>();
+        QueueNode<T> front = this.front;
         while (front != null) {
-            stringBuilder.append(front.getData()).append(" ");
+            list.add(front.getData());
             front = front.next;
         }
-        return stringBuilder.toString();
+        return list;
     }
 
-    public void enqueue(String item) {
+    public void enqueue(T item) {
         if (isEmpty()) {
-            QueueNode newNode = new QueueNode(item, null);
+            QueueNode<T> newNode = new QueueNode<T>(item, null);
             front = newNode;
             last = newNode;
         } else {
-            QueueNode newNode = new QueueNode(item, null);
+            QueueNode<T> newNode = new QueueNode<T>(item, null);
             last.next = newNode; // this is previous last
             last = newNode;  // now we are updating last
         }
@@ -41,16 +48,16 @@ public class Queue {
         front = front.next;
     }
 
-    private static class QueueNode {
-        private String data;
-        private QueueNode next;
+    private static class QueueNode<T> {
+        private T data;
+        private QueueNode<T> next;
 
-        public QueueNode(String data, QueueNode next) {
+        public QueueNode(T data, QueueNode<T> next) {
             this.data = data;
             this.next = next;
         }
 
-        public String getData() {
+        public T getData() {
             return data;
         }
     }

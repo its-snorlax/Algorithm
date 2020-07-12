@@ -53,4 +53,14 @@ public class StackTest {
         stack.push("hello");
         Assert.assertFalse(stack.isEmpty());
     }
-}
+
+    @Test
+    public void shouldReturnPeekElement() {
+        Stack<String> stack = new Stack<>();
+        stack.push("hello");
+        stack.push("prayas");
+        stack.pop();
+        stack.push("bye");
+        Assert.assertEquals("bye", stack.peek());
+    }
+}   

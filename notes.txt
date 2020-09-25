@@ -1,0 +1,33 @@
+Selection sort
+input {6 2 3 4 3}
+i = 0;
+minIn = i;
+j = 0;
+if input[minIn]6 > input[j]6  false
+    minIN = j;
+i = 0;
+minIn = 0;
+j = 1
+if input[minIn]6 > input[j]2  True
+    minIN = j;
+i = 0;
+minIn = 1
+j = 2
+if input[minIn]2 > input[j]3  False
+    minIN = j;
+i = 0
+minIn = 1
+j = 3
+if input[minIn]2 > input[j]4  False
+    minIN = j;
+i = 0
+minIN = 1
+j = 4
+if input[minIn]2 > input[j]3  False
+    minIN = j;
+swap (input, i, minIn)
+after swap input {2 6 3 4 3}
+----------------------------------------------
+
+Insertion Sort
+input {6 2 3 4 3}

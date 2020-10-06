@@ -34,6 +34,25 @@ public class BinarySearchTree {
         return root;
     }
 
+    public void insertIteration(int data) {
+        if (root == null) {
+            root = new Node(data);
+            totalNodes++;
+            return;
+        }
+        Node temp = root;
+        Node leafNode = null;
+        while (temp != null) {
+            leafNode = temp;
+            if (data < temp.data) temp = temp.left;
+            else temp = temp.right;
+        }
+        temp = new Node(data);
+        if (leafNode.data > data) leafNode.left = temp;
+        if (leafNode.data < data) leafNode.right = temp;
+        totalNodes++;
+    }
+
     public int getTotalNodes() {
         return totalNodes;
     }

@@ -2,7 +2,7 @@ package linkedList;
 
 public class MergeLinkedList {
 
-    public static LinkedListNode mergeListsInSortedManner(LinkedListNode head1, LinkedListNode head2) {
+    public static ListNode mergeListsInSortedManner(ListNode head1, ListNode head2) {
         if (head1 == null) return head2;
         if (head2 == null) return head1;
         if (head1.data < head2.data) {

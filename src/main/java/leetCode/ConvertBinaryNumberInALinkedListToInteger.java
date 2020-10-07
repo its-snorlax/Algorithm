@@ -1,9 +1,9 @@
 package leetCode;
 
-import linkedList.LinkedListNode;
+import linkedList.ListNode;
 
 public class ConvertBinaryNumberInALinkedListToInteger {
-    public int getDecimalValue(LinkedListNode head) {
+    public int getDecimalValue(ListNode head) {
         int decimal = 0;
         while (head != null) {
             decimal = decimal * 2;

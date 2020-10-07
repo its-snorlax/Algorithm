@@ -1,10 +1,10 @@
 package linkedList;
 
-public class LinkedListNode {
+public class ListNode {
     public  int data;
-    public LinkedListNode next;
+    public ListNode next;
 
-    public LinkedListNode(int data) {
+    public ListNode(int data) {
         this.data = data;
         this.next = null;
     }

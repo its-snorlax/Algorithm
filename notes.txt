@@ -73,3 +73,20 @@ j = 2
 if (input[i]6 < input[j]4)
     swap(input,3,2)
     j--
+
+    --------------------
+1 2 3 4 5 6
+k = 2
+
+head = 1
+oldHead = 1
+mid = 4
+oldLast = 6
+
+5 6 1 2 3 4 - expected
+
+oldLast.next = head
+head = mid.next
+mid.next = null
+
+

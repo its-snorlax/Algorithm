@@ -26,7 +26,7 @@ public class BinarySearchTree {
             return root;
         }
 
-        if (data < root.data) {
+        if (data < root.val) {
             root.left = createNode(root.left, data);
         } else {
             root.right = createNode(root.right, data);
@@ -44,12 +44,12 @@ public class BinarySearchTree {
         TreeNode leafNode = null;
         while (temp != null) {
             leafNode = temp;
-            if (data < temp.data) temp = temp.left;
+            if (data < temp.val) temp = temp.left;
             else temp = temp.right;
         }
         temp = new TreeNode(data);
-        if (leafNode.data > data) leafNode.left = temp;
-        if (leafNode.data < data) leafNode.right = temp;
+        if (leafNode.val > data) leafNode.left = temp;
+        if (leafNode.val < data) leafNode.right = temp;
         totalNodes++;
     }
 
@@ -66,7 +66,7 @@ public class BinarySearchTree {
         tempStack.push(root);
         while (!tempStack.isEmpty()) {
             TreeNode currentNode = tempStack.pop();
-            output.add(currentNode.data);
+            output.add(currentNode.val);
             if (currentNode.right != null) {
                 tempStack.push(currentNode.right);
             }
@@ -89,7 +89,7 @@ public class BinarySearchTree {
                 root = root.left;
             } else {
                 TreeNode lastVisit = tempStack.pop();
-                output.add(lastVisit.data);
+                output.add(lastVisit.val);
                 root = lastVisit.right;
             }
         }
@@ -112,7 +112,7 @@ public class BinarySearchTree {
                 if (peek.right != null && lastVisit != peek.right) {
                     root = peek.right;
                 } else {
-                    output.add(peek.data);
+                    output.add(peek.val);
                     lastVisit = tempStack.pop();
                 }
             }

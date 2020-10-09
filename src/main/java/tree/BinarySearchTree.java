@@ -8,7 +8,7 @@ import java.util.Stack;
 public class BinarySearchTree {
 
     private int totalNodes;
-    private Node root;
+    private TreeNode root;
 
     public BinarySearchTree() {
         this.totalNodes = 0;
@@ -19,9 +19,9 @@ public class BinarySearchTree {
         root = createNode(root, data);
     }
 
-    private Node createNode(Node root, int data) {
+    private TreeNode createNode(TreeNode root, int data) {
         if (root == null) {
-            root = new Node(data);
+            root = new TreeNode(data);
             totalNodes++;
             return root;
         }
@@ -36,18 +36,18 @@ public class BinarySearchTree {
 
     public void insertIteration(int data) {
         if (root == null) {
-            root = new Node(data);
+            root = new TreeNode(data);
             totalNodes++;
             return;
         }
-        Node temp = root;
-        Node leafNode = null;
+        TreeNode temp = root;
+        TreeNode leafNode = null;
         while (temp != null) {
             leafNode = temp;
             if (data < temp.data) temp = temp.left;
             else temp = temp.right;
         }
-        temp = new Node(data);
+        temp = new TreeNode(data);
         if (leafNode.data > data) leafNode.left = temp;
         if (leafNode.data < data) leafNode.right = temp;
         totalNodes++;
@@ -62,10 +62,10 @@ public class BinarySearchTree {
             return Collections.emptyList();
         }
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<Node> tempStack = new Stack<>();
+        Stack<TreeNode> tempStack = new Stack<>();
         tempStack.push(root);
         while (!tempStack.isEmpty()) {
-            Node currentNode = tempStack.pop();
+            TreeNode currentNode = tempStack.pop();
             output.add(currentNode.data);
             if (currentNode.right != null) {
                 tempStack.push(currentNode.right);
@@ -82,13 +82,13 @@ public class BinarySearchTree {
             return Collections.emptyList();
         }
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<Node> tempStack = new Stack<>();
+        Stack<TreeNode> tempStack = new Stack<>();
         while (!tempStack.isEmpty() || root != null) {
             if (root != null) {
                 tempStack.push(root);
                 root = root.left;
             } else {
-                Node lastVisit = tempStack.pop();
+                TreeNode lastVisit = tempStack.pop();
                 output.add(lastVisit.data);
                 root = lastVisit.right;
             }
@@ -101,14 +101,14 @@ public class BinarySearchTree {
             return Collections.emptyList();
         }
         ArrayList<Integer> output = new ArrayList<>();
-        Stack<Node> tempStack = new Stack<>();
-        Node lastVisit = null;
+        Stack<TreeNode> tempStack = new Stack<>();
+        TreeNode lastVisit = null;
         while (!tempStack.isEmpty() || root != null) {
             if (root != null) {
                 tempStack.push(root);
                 root = root.left;
             } else {
-                Node peek = tempStack.peek();
+                TreeNode peek = tempStack.peek();
                 if (peek.right != null && lastVisit != peek.right) {
                     root = peek.right;
                 } else {
@@ -119,17 +119,5 @@ public class BinarySearchTree {
         }
 
         return output;
-    }
-
-    static class Node {
-        private int data;
-        private Node left;
-        private Node right;
-
-        public Node(int data) {
-            this.data = data;
-            this.left = null;
-            this.right = null;
-        }
     }
 }

@@ -3,10 +3,11 @@ package leetCode;
 
 import linkedList.ListNode;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class ReverseLinkedList {
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseListUsingStack(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -28,5 +29,28 @@ public class ReverseLinkedList {
             }
         }
         return newHead;
+    }
+
+    public ListNode reverseList(ListNode head) {
+        ListNode current = head;
+        ListNode prevItem = null;
+        ListNode nextItem;
+
+        while (current != null) {
+            nextItem = current.next;
+            current.next = prevItem;
+            prevItem = current;
+            current = nextItem;
+        }
+        return prevItem;
+    }
+
+    public ListNode reverseListUsingRecursion(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode rest = reverseListUsingRecursion(head.next);
+        head.next.next = head;
+        head.next = null;
+        return rest;
     }
 }

@@ -5,7 +5,7 @@ public class MergeLinkedList {
     public static ListNode mergeListsInSortedManner(ListNode head1, ListNode head2) {
         if (head1 == null) return head2;
         if (head2 == null) return head1;
-        if (head1.data < head2.data) {
+        if (head1.val < head2.val) {
             head1.next = mergeListsInSortedManner(head1.next, head2);
             return head1;
         } else {

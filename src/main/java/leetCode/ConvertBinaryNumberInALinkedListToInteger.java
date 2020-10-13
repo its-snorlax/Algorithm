@@ -7,7 +7,7 @@ public class ConvertBinaryNumberInALinkedListToInteger {
         int decimal = 0;
         while (head != null) {
             decimal = decimal * 2;
-            decimal += head.data;
+            decimal += head.val;
             head = head.next;
         }
         return decimal;

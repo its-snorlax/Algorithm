@@ -1,6 +1,7 @@
 //https://leetcode.com/problems/mean-of-array-after-removing-some-elements/
 package leetCode;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class MeanOfArrayAfterRemovingSomeElements {
@@ -14,6 +15,6 @@ public class MeanOfArrayAfterRemovingSomeElements {
             sum += arr[i];
         }
         mean = (double) sum / (end - elementRemoved);
-        return mean;
+        return Double.parseDouble(new DecimalFormat("#.#####").format(mean));
     }
 }
